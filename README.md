@@ -186,6 +186,17 @@ Possible future improvements include:
 - Expanding API documentation with example responses.
 - Improving deployment and setup instructions.
 
+## Application Screenshots
+
+### Welcome Screen
+![Welcome Screen](screenshots/welcome-screen.png)
+
+### Login Screen
+![Login Screen](screenshots/login-screen.png)
+
+### Sign Up Screen
+![Sign Up Screen](screenshots/signup-screen.png)
+
 ## Documentation
 
 - [API Documentation](API_DOCUMENTATION.md)
