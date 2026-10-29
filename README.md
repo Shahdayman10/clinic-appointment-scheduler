@@ -189,13 +189,13 @@ Possible future improvements include:
 ## Application Screenshots
 
 ### Welcome Screen
-![Welcome Screen](screenshots/welcome-screen.png)
+![Welcome Screen](screenshots/welcome-screen.jfif)
 
 ### Login Screen
-![Login Screen](screenshots/login-screen.png)
+![Login Screen](screenshots/login-screen.jfif)
 
 ### Sign Up Screen
-![Sign Up Screen](screenshots/signup-screen.png)
+![Sign Up Screen](screenshots/signup-screen.jfif)
 
 ## Documentation
 
