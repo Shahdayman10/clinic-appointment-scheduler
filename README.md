@@ -4,6 +4,29 @@ A Java desktop application for managing clinic appointments, built with JavaFX a
 
 This project demonstrates desktop application development, database integration, appointment management, and REST API concepts.
 
+## Application Screenshots
+
+### Welcome Screen
+![Welcome Screen](screenshots/welcome-screen.jfif)
+
+### Login Screen
+![Login Screen](screenshots/login-screen.jfif)
+
+### Sign Up Screen
+![Sign Up Screen](screenshots/signup-screen.jfif)
+
+### Dashboard Screen
+![Dashboard Screen](screenshots/dashboard.jfif)
+
+### Patients Screen
+![Patients Screen](screenshots/5.jfif)
+
+### Doctors Screen
+![Doctors Screen](screenshots/6.jfif)
+
+### Appointments Screen
+![Appointments Screen](screenshots/7.jfif)
+
 ## Features
 
 - **Patient Management:** Manage patient information.
@@ -185,17 +208,6 @@ Possible future improvements include:
 - Adding screenshots and a demonstration video.
 - Expanding API documentation with example responses.
 - Improving deployment and setup instructions.
-
-## Application Screenshots
-
-### Welcome Screen
-![Welcome Screen](screenshots/welcome-screen.jfif)
-
-### Login Screen
-![Login Screen](screenshots/login-screen.jfif)
-
-### Sign Up Screen
-![Sign Up Screen](screenshots/signup-screen.jfif)
 
 ## Documentation
 
