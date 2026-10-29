@@ -1,0 +1,96 @@
+/* ================= ICON STYLES ================= */
+
+/* Default icon styling */
+.icon {
+    -fx-fill: #6c757d;
+}
+
+/* Navigation icons */
+.nav-icon {
+    -fx-fill: #ecf0f1;
+    -fx-padding: 0 10 0 0;
+}
+
+.nav-icon:hover {
+    -fx-fill: #ffffff;
+}
+
+.sidebar-button.active .icon {
+    -fx-fill: #2c3e50;
+}
+
+/* Button icons */
+.button-icon {
+    -fx-fill: #ffffff;
+    -fx-padding: 0 8 0 0;
+}
+
+/* Action icons (edit, delete, etc.) */
+.action-icon {
+    -fx-fill: #6c757d;
+    -fx-cursor: hand;
+}
+
+.action-icon:hover {
+    -fx-fill: #4361ee;
+}
+
+.action-icon.delete:hover {
+    -fx-fill: #dc3545;
+}
+
+.action-icon.edit:hover {
+    -fx-fill: #ffc107;
+}
+
+/* Status icons */
+.status-icon {
+    -fx-fill: #6c757d;
+}
+
+.status-icon.completed {
+    -fx-fill: #6c757d;
+}
+
+.status-icon.cancelled {
+    -fx-fill: #dc3545;
+}
+
+/* Card icons */
+.card-icon {
+    -fx-fill: #4361ee;
+    -fx-opacity: 0.9;
+}
+
+/* Special styling for doctor icons */
+.doctor-icon {
+    -fx-fill: #2196F3;
+    -fx-opacity: 0.95;
+}
+
+/* Special styling for patient icons */
+.patient-icon {
+    -fx-fill: #4CAF50;
+    -fx-opacity: 0.95;
+}
+
+/* Icon sizes */
+.icon-small {
+    -fx-fit-width: 12px;
+    -fx-fit-height: 12px;
+}
+
+.icon-medium {
+    -fx-fit-width: 16px;
+    -fx-fit-height: 16px;
+}
+
+.icon-large {
+    -fx-fit-width: 20px;
+    -fx-fit-height: 20px;
+}
+
+.icon-xlarge {
+    -fx-fit-width: 24px;
+    -fx-fit-height: 24px;
+}

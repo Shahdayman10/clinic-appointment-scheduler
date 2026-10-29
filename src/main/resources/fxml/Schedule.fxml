@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.clinic.app.Controllers.ScheduleController"
+            stylesheets="@../css/schedule.css">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox fx:id="topBar" prefHeight="70" alignment="CENTER_LEFT" styleClass="top-bar">
+            <Label text="Clinic Appointment Scheduler" styleClass="platform-name" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button styleClass="settings-button" onAction="#exitApp">
+                <graphic>
+                    <ImageView fitHeight="24" fitWidth="24">
+                        <Image url="@../icons/logout.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <HBox fx:id="mainContainer"
+              spacing="0"
+              fillHeight="true"
+              styleClass="main-container dashboard-accent"
+              BorderPane.alignment="CENTER">
+
+            <!-- Sidebar -->
+            <VBox fx:id="sidebar" styleClass="sidebar">
+                <BorderPane VBox.vgrow="ALWAYS">
+                    <center>
+                        <VBox fx:id="sidebarContent" spacing="15" styleClass="sidebar-content">
+                            <Button fx:id="btnDashboard" text="Home" styleClass="sidebar-button" onAction="#showDashboard">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/dashboard.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button fx:id="btnPatients" text="Patients" styleClass="sidebar-button" onAction="#showPatients">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/patient.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button fx:id="btnDoctors" text="Doctors" styleClass="sidebar-button" onAction="#showDoctors">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/doctor_stethoscope.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button fx:id="btnAppointments" text="Appointments" styleClass="sidebar-button" onAction="#showAppointments">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/appointments.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button fx:id="btnSchedule" text="Schedule" styleClass="sidebar-button" onAction="#showSchedule">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/schedule.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                        </VBox>
+                    </center>
+
+                    <bottom>
+                        <VBox styleClass="contact-container" spacing="5" BorderPane.alignment="CENTER">
+                            <Label text="Need Help?" styleClass="contact-title"/>
+                            <Label text="Contact: support@clinic.com" styleClass="contact-info"/>
+                            <Label text="Phone: +123 456 7890" styleClass="contact-info"/>
+                            <BorderPane.margin><Insets bottom="10"/></BorderPane.margin>
+                        </VBox>
+                    </bottom>
+                </BorderPane>
+            </VBox>
+
+            <!-- Content Area inside ScrollPane -->
+            <ScrollPane fx:id="contentScroll"
+                        fitToWidth="true"
+                        fitToHeight="false"
+                        pannable="true"
+                        hbarPolicy="NEVER"
+                        vbarPolicy="AS_NEEDED"
+                        HBox.hgrow="ALWAYS"
+                        VBox.vgrow="ALWAYS"
+                        styleClass="content-scroll">
+
+                <content>
+                    <VBox fx:id="contentArea"
+                          fillWidth="true"
+                          styleClass="content-area">
+
+                        <StackPane styleClass="welcome-container" alignment="CENTER">
+                            <VBox fx:id="mainContent"
+                                  alignment="TOP_CENTER"
+                                  spacing="25"
+                                  styleClass="main-content-container"
+                                  maxWidth="900">
+
+                                <!-- Section Header -->
+                                <VBox styleClass="section-header">
+                                    <Label text="Doctor Schedule Generator" styleClass="section-title"/>
+                                </VBox>
+
+                                <!-- Schedule Controls -->
+                                <VBox spacing="15" styleClass="form-container">
+                                    <VBox spacing="10">
+                                        <Label text="Select Doctor:" styleClass="form-label"/>
+                                        <ComboBox fx:id="doctorComboBox" prefHeight="30" prefWidth="300" promptText="Choose a doctor..."/>
+                                    </VBox>
+
+                                    <HBox spacing="15" alignment="CENTER_LEFT">
+                                        <VBox spacing="5">
+                                            <Label text="From Date:" styleClass="form-label"/>
+                                            <DatePicker fx:id="fromDatePicker" prefHeight="30" prefWidth="200" promptText="Select start date"/>
+                                        </VBox>
+
+                                        <VBox spacing="5">
+                                            <Label text="To Date:" styleClass="form-label"/>
+                                            <DatePicker fx:id="toDatePicker" prefHeight="30" prefWidth="200" promptText="Select end date"/>
+                                        </VBox>
+                                    </HBox>
+
+                                    <HBox alignment="CENTER" spacing="15">
+                                        <Button fx:id="generateButton" mnemonicParsing="false" onAction="#generateSchedule" prefHeight="35" prefWidth="120" styleClass="primary-button" text="Generate"/>
+                                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelGeneration" prefHeight="35" prefWidth="120" styleClass="secondary-button" text="Cancel"/>
+                                        <ProgressIndicator fx:id="progressIndicator" prefHeight="30" prefWidth="30" visible="false"/>
+                                    </HBox>
+
+                                    <Label fx:id="statusLabel" alignment="CENTER" text="Ready to generate schedule" textAlignment="CENTER"/>
+                                </VBox>
+
+                                <!-- Schedule Output -->
+                                <VBox styleClass="table-container" VBox.vgrow="ALWAYS">
+                                    <Label text="Generated Schedule" styleClass="table-title"/>
+                                    <TextArea fx:id="scheduleTextArea" editable="false" prefHeight="350" promptText="Generated schedule will appear here..." wrapText="true" VBox.vgrow="ALWAYS">
+                                        <font>
+                                            <Font name="Monospaced Regular" size="12.0"/>
+                                        </font>
+                                    </TextArea>
+                                </VBox>
+
+                            </VBox>
+                        </StackPane>
+                    </VBox>
+                </content>
+            </ScrollPane>
+        </HBox>
+    </center>
+</BorderPane>

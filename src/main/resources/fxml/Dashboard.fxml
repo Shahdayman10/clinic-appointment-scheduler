@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.clinic.app.Controllers.DashboardController"
+            stylesheets="@../css/dashboard.css">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox fx:id="topBar" prefHeight="70" alignment="CENTER_LEFT" styleClass="top-bar">
+            <Label text="Clinic Appointment Scheduler" styleClass="platform-name" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button styleClass="settings-button" onAction="#exitApp">
+                <graphic>
+                    <ImageView fitHeight="24" fitWidth="24">
+                        <Image url="@../icons/logout.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <HBox fx:id="mainContainer"
+              spacing="0"
+              fillHeight="true"
+              styleClass="main-container dashboard-accent"
+              BorderPane.alignment="CENTER">
+
+            <!-- Sidebar -->
+            <VBox fx:id="sidebar" styleClass="sidebar">
+                <BorderPane VBox.vgrow="ALWAYS">
+                    <center>
+                        <VBox fx:id="sidebarContent" spacing="15" styleClass="sidebar-content">
+                            <Button fx:id="btnDashboard" text="Home" styleClass="sidebar-button" onAction="#showDashboard">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/dashboard.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button fx:id="btnPatients" text="Patients" styleClass="sidebar-button" onAction="#showPatients">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/patient.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button fx:id="btnDoctors" text="Doctors" styleClass="sidebar-button" onAction="#showDoctors">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/doctor_stethoscope.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button fx:id="btnAppointments" text="Appointments" styleClass="sidebar-button" onAction="#showAppointments">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/appointments.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button fx:id="btnSchedule" text="Schedule" styleClass="sidebar-button" onAction="#showSchedule">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/schedule.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                        </VBox>
+                    </center>
+
+                    <bottom>
+                        <VBox styleClass="contact-container" spacing="5" BorderPane.alignment="CENTER">
+                            <Label text="Need Help?" styleClass="contact-title"/>
+                            <Label text="Contact: support@clinic.com" styleClass="contact-info"/>
+                            <Label text="Phone: +123 456 7890" styleClass="contact-info"/>
+                            <BorderPane.margin><Insets bottom="10"/></BorderPane.margin>
+                        </VBox>
+                    </bottom>
+                </BorderPane>
+            </VBox>
+
+            <!-- Content Area -->
+            <ScrollPane fx:id="contentScroll"
+                        fitToWidth="true"
+                        fitToHeight="false"
+                        pannable="true"
+                        hbarPolicy="NEVER"
+                        vbarPolicy="AS_NEEDED"
+                        HBox.hgrow="ALWAYS"
+                        VBox.vgrow="ALWAYS"
+                        styleClass="content-scroll">
+
+                <content>
+                    <VBox fx:id="contentArea"
+                          fillWidth="true"
+                          styleClass="content-area">
+
+                        <StackPane styleClass="welcome-container" alignment="CENTER">
+                            <VBox fx:id="mainContent"
+                                  alignment="CENTER"
+                                  spacing="25"
+                                  styleClass="main-content-container"
+                                  maxWidth="900">
+
+                                <!-- Intro -->
+                                <VBox alignment="CENTER" spacing="8" styleClass="intro-container">
+                                    <Label fx:id="welcomeLabel" text="Welcome back," styleClass="intro-subtitle"/>
+                                    <Label text="Clinic Management System" styleClass="intro-title"/>
+                                    <Label text="Your comprehensive solution for managing patients, doctors, appointments, and schedules efficiently."
+                                           styleClass="intro-description"
+                                           wrapText="true"
+                                           textAlignment="CENTER"/>
+                                </VBox>
+
+                                <!-- Cards Row -->
+                                <HBox fx:id="cardsRow"
+                                      spacing="30"
+                                      alignment="CENTER"
+                                      styleClass="cards-container">
+
+                                    <VBox styleClass="dashboard-card"
+                                          alignment="CENTER"
+                                          spacing="15"
+                                          onMouseClicked="#handleCardClick"
+                                          userData="PATIENTS"
+                                          HBox.hgrow="ALWAYS"
+                                          maxWidth="Infinity">
+                                        <ImageView fx:id="patientsCardIcon" fitHeight="60" fitWidth="60" styleClass="card-icon">
+                                            <Image url="@../icons/patient.png" />
+                                        </ImageView>
+                                        <Label text="Patients" styleClass="card-title"/>
+                                        <Label fx:id="patientsCount" text="0" styleClass="card-value"/>
+                                    </VBox>
+
+                                    <VBox styleClass="dashboard-card"
+                                          alignment="CENTER"
+                                          spacing="15"
+                                          onMouseClicked="#handleCardClick"
+                                          userData="DOCTORS"
+                                          HBox.hgrow="ALWAYS"
+                                          maxWidth="Infinity">
+                                        <ImageView fx:id="doctorsCardIcon" fitHeight="60" fitWidth="60" styleClass="card-icon">
+                                            <Image url="@../icons/doctor_stethoscope.png" />
+                                        </ImageView>
+                                        <Label text="Doctors" styleClass="card-title"/>
+                                        <Label fx:id="doctorsCount" text="0" styleClass="card-value"/>
+                                    </VBox>
+
+                                    <VBox styleClass="dashboard-card"
+                                          alignment="CENTER"
+                                          spacing="15"
+                                          onMouseClicked="#handleCardClick"
+                                          userData="APPOINTMENTS"
+                                          HBox.hgrow="ALWAYS"
+                                          maxWidth="Infinity">
+                                        <ImageView fx:id="appointmentsCardIcon" fitHeight="60" fitWidth="60" styleClass="card-icon">
+                                            <Image url="@../icons/appointments.png" />
+                                        </ImageView>
+                                        <Label text="Appointments" styleClass="card-title"/>
+                                        <Label fx:id="appointmentsCount" text="0" styleClass="card-value"/>
+                                    </VBox>
+
+                                    <VBox styleClass="dashboard-card"
+                                          alignment="CENTER"
+                                          spacing="15"
+                                          onMouseClicked="#handleCardClick"
+                                          userData="SCHEDULE"
+                                          HBox.hgrow="ALWAYS"
+                                          maxWidth="Infinity">
+                                        <ImageView fx:id="scheduleCardIcon" fitHeight="60" fitWidth="60" styleClass="card-icon">
+                                            <Image url="@../icons/calendar.png" />
+                                        </ImageView>
+                                        <Label text="Schedule" styleClass="card-title"/>
+                                        <Label fx:id="scheduleCount" text="0" styleClass="card-value"/>
+                                    </VBox>
+                                </HBox>
+
+                                <!-- Recent Activity -->
+                                <VBox styleClass="recent-activity" spacing="15">
+                                    <Label text="Recent Activity" styleClass="section-title"/>
+                                    <VBox styleClass="activity-list">
+                                        <HBox styleClass="activity-item" spacing="10" alignment="CENTER_LEFT">
+                                            <Label text="• New patient registration: John Doe" styleClass="activity-text"/>
+                                            <Label text="2 hours ago" styleClass="activity-time"/>
+                                        </HBox>
+                                        <HBox styleClass="activity-item" spacing="10" alignment="CENTER_LEFT">
+                                            <Label text="• Appointment scheduled with Dr. Smith" styleClass="activity-text"/>
+                                            <Label text="5 hours ago" styleClass="activity-time"/>
+                                        </HBox>
+                                        <HBox styleClass="activity-item" spacing="10" alignment="CENTER_LEFT">
+                                            <Label text="• Medical checkup completed" styleClass="activity-text"/>
+                                            <Label text="Yesterday" styleClass="activity-time"/>
+                                        </HBox>
+                                    </VBox>
+                                </VBox>
+
+                            </VBox>
+                        </StackPane>
+                    </VBox>
+                </content>
+            </ScrollPane>
+        </HBox>
+    </center>
+</BorderPane>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.clinic.app.Controllers.AppointmentController"
+            stylesheets="@../css/appointment.css">
+
+    <!-- Top Bar -->
+    <top>
+        <HBox fx:id="topBar" prefHeight="70" alignment="CENTER_LEFT" styleClass="top-bar">
+            <Label text="Clinic Appointment Scheduler" styleClass="platform-name" />
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Settings: Exit only -->
+            <Button styleClass="settings-button" onAction="#exitApp">
+                <graphic>
+                    <ImageView fitHeight="24" fitWidth="24">
+                        <Image url="@../icons/logout.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <HBox fx:id="mainContainer"
+              spacing="0"
+              fillHeight="true"
+              styleClass="main-container appointments-accent"
+              BorderPane.alignment="CENTER">
+
+            <!-- Sidebar -->
+            <VBox fx:id="sidebar" styleClass="sidebar">
+                <BorderPane VBox.vgrow="ALWAYS">
+                    <center>
+                        <VBox fx:id="sidebarContent" spacing="15" styleClass="sidebar-content">
+                            <Button fx:id="btnDashboard" text="Home"
+                                    styleClass="sidebar-button"
+                                    onAction="#showDashboard">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/dashboard.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+
+                            <Button fx:id="btnPatients" text="Patients"
+                                    styleClass="sidebar-button"
+                                    onAction="#showPatients">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/patient.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+
+                            <Button fx:id="btnDoctors" text="Doctors"
+                                    styleClass="sidebar-button"
+                                    onAction="#showDoctors">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/doctor_stethoscope.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+
+                            <Button fx:id="btnAppointments" text="Appointments"
+                                    styleClass="sidebar-button"
+                                    onAction="#showAppointments">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/appointments.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+
+                            <Button fx:id="btnSchedule" text="Schedule"
+                                    styleClass="sidebar-button"
+                                    onAction="#showSchedule">
+                                <graphic>
+                                    <ImageView fitHeight="24" fitWidth="24">
+                                        <Image url="@../icons/schedule.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+
+                        </VBox>
+                    </center>
+
+                    <!-- Need Help أسفل -->
+                    <bottom>
+                        <VBox styleClass="contact-container" spacing="5" BorderPane.alignment="CENTER">
+                            <Label text="Need Help?" styleClass="contact-title"/>
+                            <Label text="Contact: support@clinic.com" styleClass="contact-info"/>
+                            <Label text="Phone: +123 456 7890" styleClass="contact-info"/>
+                            <BorderPane.margin><Insets bottom="10"/></BorderPane.margin>
+                        </VBox>
+                    </bottom>
+                </BorderPane>
+            </VBox>
+
+            <!-- Content Area داخل ScrollPane -->
+            <ScrollPane fx:id="contentScroll"
+                        fitToWidth="true"
+                        fitToHeight="false"
+                        pannable="true"
+                        hbarPolicy="NEVER"
+                        vbarPolicy="AS_NEEDED"
+                        HBox.hgrow="ALWAYS"
+                        VBox.vgrow="ALWAYS"
+                        styleClass="content-scroll">
+
+                <content>
+                    <VBox fx:id="contentArea"
+                          fillWidth="true"
+                          styleClass="content-area appointment-container">
+
+                        <!-- Section Header -->
+                        <VBox styleClass="section-header">
+                            <Label text="Appointment Scheduling" styleClass="section-title"/>
+                        </VBox>
+
+                        <!-- Form Container -->
+                        <VBox styleClass="form-container">
+                            <Label text="Schedule New Appointment" styleClass="form-title"/>
+
+                            <GridPane styleClass="form-grid">
+                                <columnConstraints>
+                                    <ColumnConstraints prefWidth="150" halignment="RIGHT"/>
+                                    <ColumnConstraints prefWidth="300" halignment="LEFT"/>
+                                    <ColumnConstraints prefWidth="150" halignment="RIGHT"/>
+                                    <ColumnConstraints prefWidth="300" halignment="LEFT"/>
+                                </columnConstraints>
+
+                                <rowConstraints>
+                                    <RowConstraints prefHeight="40"/>
+                                    <RowConstraints prefHeight="40"/>
+                                    <RowConstraints prefHeight="40"/>
+                                    <RowConstraints prefHeight="40"/>
+                                    <RowConstraints prefHeight="60"/> <!-- صف جديد للأزرار -->
+                                </rowConstraints>
+
+                                <!-- Row 1 -->
+                                <Label text="Patient:" styleClass="form-label" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <ComboBox fx:id="cbPatient" styleClass="form-input" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                                <Label text="Doctor:" styleClass="form-label" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                                <ComboBox fx:id="cbDoctor" styleClass="form-input" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                                <!-- Row 2 -->
+                                <Label text="Date:" styleClass="form-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <DatePicker fx:id="dpDate" styleClass="form-input" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                                <Label text="Time:" styleClass="form-label" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                                <TextField fx:id="txtTime" styleClass="form-input" GridPane.rowIndex="1" GridPane.columnIndex="3" promptText="HH:MM (24h format)"/>
+
+                                <!-- Row 3 -->
+                                <Label text="Notes:" styleClass="form-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <TextArea fx:id="taNotes" styleClass="form-textarea" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowSpan="2"/>
+
+                                <!-- Row 5: Buttons - تم نقلها إلى أسفل -->
+                                <HBox spacing="15" alignment="CENTER_LEFT" GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="3">
+                                    <Button text="Schedule" styleClass="save-button" onAction="#scheduleAppointment"/>
+                                    <Button text="Clear" styleClass="clear-button" onAction="#clearForm"/>
+                                </HBox>
+                            </GridPane>
+                        </VBox>
+
+                        <!-- Search and Filter Container -->
+                        <VBox styleClass="search-sort-container" spacing="10">
+                            <Label text="Search and Filter Appointments" styleClass="search-title"/>
+
+                            <HBox spacing="10" alignment="CENTER_LEFT" styleClass="search-controls">
+                                <Label text="Search:" styleClass="search-label"/>
+                                <TextField fx:id="txtSearch" promptText="Search by patient, doctor, date, status..."
+                                           styleClass="search-field" HBox.hgrow="ALWAYS"/>
+                                <Button text="Search" styleClass="search-button" onAction="#handleSearch"/>
+                                <Button text="Clear" styleClass="clear-search-button" onAction="#handleClearSearch"/>
+                            </HBox>
+
+                            <HBox spacing="10" alignment="CENTER_LEFT" styleClass="filter-controls">
+                                <Label text="Status:" styleClass="filter-label"/>
+                                <ComboBox fx:id="cbStatusFilter" prefWidth="150" styleClass="filter-combo"/>
+                                <Label text="Sort by:" styleClass="sort-label"/>
+                                <ComboBox fx:id="cbSortBy" prefWidth="150" styleClass="sort-combo"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Label text="Total Appointments: " styleClass="total-label"/>
+                                <Label fx:id="lblTotalAppointments" text="0" styleClass="total-count"/>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Appointments List -->
+                        <VBox styleClass="table-container">
+                            <Label text="Scheduled Appointments" styleClass="table-title"/>
+
+                            <TableView fx:id="appointmentsTable" styleClass="table-view" onMouseClicked="#handleRowClick">
+                                <columns>
+                                    <TableColumn text="ID" prefWidth="70"/>
+                                    <TableColumn text="Patient" prefWidth="180"/>
+                                    <TableColumn text="Doctor" prefWidth="180"/>
+                                    <TableColumn text="Date" prefWidth="120"/>
+                                    <TableColumn text="Time" prefWidth="100"/>
+                                    <TableColumn text="Status" prefWidth="100"/>
+                                    <TableColumn text="Actions" prefWidth="160"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+
+                        <!-- Toolbar for Refresh, Reminders, etc. - Moved below table -->
+                        <HBox spacing="8" alignment="CENTER_LEFT" styleClass="actions-toolbar">
+                            <Button fx:id="refreshButton" text="Refresh Appointments" styleClass="refresh-button" onAction="#refreshAppointments"/>
+                            <Button fx:id="generateRemindersButton" text="Generate Reminders" styleClass="reminder-button" onAction="#generateReminders"/>
+                            <Button fx:id="sendExternalRemindersButton" text="Send External Reminders" styleClass="external-reminder-button" onAction="#sendExternalReminders"/>
+                            <Button text="Cancel Task" styleClass="cancel-button" onAction="#cancelTask"/>
+                            <ProgressIndicator fx:id="progressIndicator" prefHeight="25" prefWidth="25" visible="false"/>
+                            <Label fx:id="statusLabel" text="Ready" styleClass="status-label"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                        </HBox>
+
+                        <!-- Reminders Section -->
+                        <VBox styleClass="table-container">
+                            <Label text="Upcoming Appointments (Next 48 hours)" styleClass="table-title"/>
+                            <TextArea fx:id="remindersTextArea" editable="false" prefHeight="200" promptText="Click 'Generate Reminders' to see upcoming appointments..." wrapText="true"/>
+                        </VBox>
+
+                    </VBox>
+                </content>
+            </ScrollPane>
+        </HBox>
+    </center>
+</BorderPane>
